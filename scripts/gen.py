@@ -1,6 +1,7 @@
 # 仮
 import os
 import csv
+import math
 
 dirname = os.path.dirname(__file__)
 
@@ -17,6 +18,7 @@ for game in game_list:
         ) as f:
             data.extend(csv.reader(f))
 
+    # SKK
     with open(
         os.path.join(dirname, "../out", f"{game} SKK.txt"), "w", encoding="utf-8"
     ) as f:
@@ -24,3 +26,13 @@ for game in game_list:
         for item in data:
             result.append(f"{item[1]} /{item[0]}/")
         f.write("\n".join(result))
+
+    # Wnn
+    for i in range(1, math.floor(len(data)/500)+2):
+        with open(
+            os.path.join(dirname, "../out", f"{game} Wnn_{i}.txt"), "w", encoding="utf-8"
+        ) as f:
+            result = [f"{game} {i}"]
+            for item in data:
+                result.append(f"{item[1]}\t{item[0]}")
+            f.write("\n".join(result))
