@@ -28,9 +28,11 @@ for game in game_list:
         f.write("\n".join(result))
 
     # Wnn
-    for i in range(1, math.floor(len(data)/500)+2):
+    for i in range(1, math.floor(len(data) / 500) + 2):
         with open(
-            os.path.join(dirname, "../out", f"{game} Wnn_{i}.txt"), "w", encoding="utf-8"
+            os.path.join(dirname, "../out", f"{game} Wnn_{i}.txt"),
+            "w",
+            encoding="utf-8",
         ) as f:
             result = [f"{game} {i}"]
             for item in data:
@@ -43,5 +45,8 @@ for game in game_list:
     ) as f:
         result = []
         for item in data:
-            result.append(f"{item[1]}\t{item[0]}\t{item[2]}")
+            s = f"{item[1]}\t{item[0]}\t{item[2]}"
+            if len(item) == 4:
+                s += f"\t{item[3]}"
+            result.append(s)
         f.write("\n".join(result))
