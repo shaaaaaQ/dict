@@ -18,6 +18,8 @@ for game in game_list:
         ) as f:
             data.extend(csv.reader(f))
 
+    data = list(filter(lambda item: item[1], data))
+
     # SKK
     with open(
         os.path.join(dirname, "../out", f"{game} SKK.txt"), "w", encoding="utf-8"

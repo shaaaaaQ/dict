@@ -7,4 +7,6 @@
 品詞どうする
 
 鳴潮 読み方 わからん  
-chatgptに任せてるから間違えてるところあがあるかも
+chatgpt に任せてるから間違えてるところあがあるかも
+
+原神 辞書 (https://genshin-dictionary.com/ja/opendata)
