@@ -46,7 +46,7 @@ for game in game_list:
         result = []
         for item in data:
             s = f"{item[1]}\t{item[0]}\t{item[2]}"
-            if len(item) == 4:
+            if len(item) == 4 and item[3]:
                 s += f"\t{item[3]}"
             result.append(s)
         f.write("\n".join(result))
