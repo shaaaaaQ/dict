@@ -36,3 +36,12 @@ for game in game_list:
             for item in data:
                 result.append(f"{item[1]}\t{item[0]}")
             f.write("\n".join(result))
+
+    # MS
+    with open(
+        os.path.join(dirname, "../out", f"{game} MS-IME.txt"), "w", encoding="utf-16"
+    ) as f:
+        result = []
+        for item in data:
+            result.append(f"{item[1]}\t{item[0]}\t{item[2]}")
+        f.write("\n".join(result))
