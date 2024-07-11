@@ -1,14 +1,14 @@
-# 仮
 import os
 import csv
 import math
+import glob
 
 dirname = os.path.dirname(__file__)
 
 game_list = os.listdir(os.path.join(dirname, "../data"))
 
 for game in game_list:
-    csv_list = os.listdir(os.path.join(dirname, "../data", game))
+    csv_list = glob.glob(os.path.join(dirname, "../data", game, "**/*.csv"), recursive=True)
 
     data = []
 
@@ -18,7 +18,8 @@ for game in game_list:
         ) as f:
             data.extend(csv.reader(f))
 
-    data = list(filter(lambda item: item[1], data))
+    data = list(filter(lambda item: item and item[1], data))
+    data = sorted(data, key=lambda d: d[1])
 
     # SKK
     with open(
