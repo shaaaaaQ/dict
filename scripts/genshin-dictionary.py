@@ -38,7 +38,6 @@ for csv_path in files:
                 excludes.append(row[0])
 with open(os.path.join(data_dir, "excludes.txt"), encoding="utf-8") as f:
     excludes.extend(f.read().splitlines())
-print(excludes)
 
 weapon = {"sword": [], "claymore": [], "polearm": [], "bow": [], "catalyst": []}
 weapon_other = []
