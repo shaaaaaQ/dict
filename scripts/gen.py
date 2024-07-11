@@ -40,7 +40,9 @@ for game in game_list:
             encoding="utf-8",
         ) as f:
             result = [f"{game} {i}"]
-            for item in data:
+            start = 500 * (i - 1)
+            stop = 500 * i
+            for item in data[start:stop]:
                 result.append(f"{item[1]}\t{item[0]}")
             f.write("\n".join(result))
 
