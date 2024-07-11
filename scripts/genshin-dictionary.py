@@ -45,6 +45,7 @@ element = []
 artifact_set = []
 artifact_piece = []
 character_main = []
+boss = []
 
 for data in dataset:
     if "ja" not in data:
@@ -68,6 +69,8 @@ for data in dataset:
             artifact_piece.append(data)
         elif "character-main" in tags:
             character_main.append(data)
+        elif "enemy-boss" in tags:
+            boss.append(data)
 
 write(weapon["sword"], "weapon/sword.csv", "名詞", "原神/武器/片手剣")
 write(weapon["claymore"], "weapon/claymore.csv", "名詞", "原神/武器/両手剣")
@@ -79,3 +82,4 @@ write(element, "element.csv", "名詞")
 write(artifact_set, "artifact/set.csv", "名詞", "原神/聖遺物")
 write(artifact_piece, "artifact/piece.csv", "名詞")
 write(character_main, "character/playable.csv", "人名", "原神/キャラクター")
+write(boss, "boss.csv", "名詞", "原神/ボス")

@@ -13,6 +13,8 @@
 pip install requests jaconv
 ```
 
+きたない
+
 ### 原神
 
 [原神 英語・中国語辞典 オープンデータ・API](https://genshin-dictionary.com/ja/opendata)
