@@ -19,10 +19,13 @@ def write(data_list, filepath, hinshi, comment=""):
                 if "pronunciationJa" in data
                 else ""
             )
-            if not comment:
-                comment = data["notes"] if "notes" in data else ""
+            _comment = ""
+            if comment:
+                _comment = comment
+            else:
+                _comment = data["notes"] if "notes" in data else ""
 
-            writer.writerow([word, hiragana, hinshi, comment])
+            writer.writerow([word, hiragana, hinshi, _comment])
 
 excludes = []
 files = glob.glob(os.path.join(data_dir, "**/*.csv"), recursive=True)
@@ -41,6 +44,7 @@ weapon = {
     "catalyst": []
 }
 weapon_other = []
+# element = []
 
 for data in dataset:
     if "ja" not in data:
@@ -56,6 +60,8 @@ for data in dataset:
                     break
             else:
                 weapon_other.append(data)
+        # elif "element" in tags:
+        #     element.append(data)
 
 write(weapon["sword"],"weapon/sword.csv","名詞","原神/武器/片手剣")
 write(weapon["claymore"],"weapon/claymore.csv","名詞","原神/武器/両手剣")
@@ -63,3 +69,4 @@ write(weapon["polearm"],"weapon/polearm.csv","名詞","原神/武器/長柄武�
 write(weapon["bow"],"weapon/bow.csv","名詞","原神/武器/弓")
 write(weapon["catalyst"],"weapon/catalyst.csv","名詞","原神/武器/法器")
 write(weapon_other,"weapon/other.csv","名詞")
+# write(element,"element.csv","名詞")
