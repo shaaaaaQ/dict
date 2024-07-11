@@ -36,10 +36,13 @@ for csv_path in files:
         for row in csv.reader(f):
             if row:
                 excludes.append(row[0])
+with open(os.path.join(data_dir, "excludes.txt"), encoding="utf-8") as f:
+    excludes.extend(f.read().splitlines())
+print(excludes)
 
 weapon = {"sword": [], "claymore": [], "polearm": [], "bow": [], "catalyst": []}
 weapon_other = []
-# element = []
+element = []
 
 for data in dataset:
     if "ja" not in data:
@@ -55,8 +58,8 @@ for data in dataset:
                     break
             else:
                 weapon_other.append(data)
-        # elif "element" in tags:
-        #     element.append(data)
+        elif "element" in tags:
+            element.append(data)
 
 write(weapon["sword"], "weapon/sword.csv", "名詞", "原神/武器/片手剣")
 write(weapon["claymore"], "weapon/claymore.csv", "名詞", "原神/武器/両手剣")
@@ -64,4 +67,4 @@ write(weapon["polearm"], "weapon/polearm.csv", "名詞", "原神/武器/長柄�
 write(weapon["bow"], "weapon/bow.csv", "名詞", "原神/武器/弓")
 write(weapon["catalyst"], "weapon/catalyst.csv", "名詞", "原神/武器/法器")
 write(weapon_other, "weapon/other.csv", "名詞")
-# write(element,"element.csv","名詞")
+write(element, "element.csv", "名詞")
