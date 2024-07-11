@@ -8,7 +8,9 @@ dirname = os.path.dirname(__file__)
 game_list = os.listdir(os.path.join(dirname, "../data"))
 
 for game in game_list:
-    csv_list = glob.glob(os.path.join(dirname, "../data", game, "**/*.csv"), recursive=True)
+    csv_list = glob.glob(
+        os.path.join(dirname, "../data", game, "**/*.csv"), recursive=True
+    )
 
     data = []
 
