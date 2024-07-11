@@ -8,6 +8,22 @@ dirname = os.path.dirname(__file__)
 data_dir = os.path.join(dirname, "../data/Genshin Impact")
 dataset = requests.get("https://dataset.genshin-dictionary.com/words.json").json()
 
+def write(data_list, filepath, hinshi, comment=""):
+    with open(os.path.join(data_dir, filepath), "a", encoding="utf-8") as f:
+        print(f"新規追加 ({filepath}): ", len(data_list))
+        writer = csv.writer(f)
+        for data in data_list:
+            word = data["ja"]
+            hiragana = (
+                jaconv.kata2hira(data["pronunciationJa"])
+                if "pronunciationJa" in data
+                else ""
+            )
+            if not comment:
+                comment = data["notes"] if "notes" in data else ""
+
+            writer.writerow([word, hiragana, hinshi, comment])
+
 excludes = []
 files = glob.glob(os.path.join(data_dir, "**/*.csv"), recursive=True)
 for csv_path in files:
@@ -41,92 +57,9 @@ for data in dataset:
             else:
                 weapon_other.append(data)
 
-with open(os.path.join(data_dir, "weapon/sword.csv"), "a", encoding="utf-8") as f:
-    print("新規追加 (武器/片手剣): ", len(weapon["sword"]))
-    writer = csv.writer(f)
-    for data in weapon["sword"]:
-        word = data["ja"]
-        hiragana = (
-            jaconv.kata2hira(data["pronunciationJa"])
-            if "pronunciationJa" in data
-            else ""
-        )
-        hinshi = "名詞"
-        comment = "原神/武器/片手剣"
-
-        writer.writerow([word, hiragana, hinshi, comment])
-
-with open(os.path.join(data_dir, "weapon/claymore.csv"), "a", encoding="utf-8") as f:
-    print("新規追加 (武器/両手剣): ", len(weapon["claymore"]))
-    writer = csv.writer(f)
-    for data in weapon["claymore"]:
-        word = data["ja"]
-        hiragana = (
-            jaconv.kata2hira(data["pronunciationJa"])
-            if "pronunciationJa" in data
-            else ""
-        )
-        hinshi = "名詞"
-        comment = "原神/武器/両手剣"
-
-        writer.writerow([word, hiragana, hinshi, comment])
-
-with open(os.path.join(data_dir, "weapon/polearm.csv"), "a", encoding="utf-8") as f:
-    print("新規追加 (武器/長柄武器): ", len(weapon["polearm"]))
-    writer = csv.writer(f)
-    for data in weapon["polearm"]:
-        word = data["ja"]
-        hiragana = (
-            jaconv.kata2hira(data["pronunciationJa"])
-            if "pronunciationJa" in data
-            else ""
-        )
-        hinshi = "名詞"
-        comment = "原神/武器/長柄武器"
-
-        writer.writerow([word, hiragana, hinshi, comment])
-
-with open(os.path.join(data_dir, "weapon/bow.csv"), "a", encoding="utf-8") as f:
-    print("新規追加 (武器/弓): ", len(weapon["bow"]))
-    writer = csv.writer(f)
-    for data in weapon["bow"]:
-        word = data["ja"]
-        hiragana = (
-            jaconv.kata2hira(data["pronunciationJa"])
-            if "pronunciationJa" in data
-            else ""
-        )
-        hinshi = "名詞"
-        comment = "原神/武器/弓"
-
-        writer.writerow([word, hiragana, hinshi, comment])
-
-with open(os.path.join(data_dir, "weapon/catalyst.csv"), "a", encoding="utf-8") as f:
-    print("新規追加 (武器/法器): ", len(weapon["catalyst"]))
-    writer = csv.writer(f)
-    for data in weapon["catalyst"]:
-        word = data["ja"]
-        hiragana = (
-            jaconv.kata2hira(data["pronunciationJa"])
-            if "pronunciationJa" in data
-            else ""
-        )
-        hinshi = "名詞"
-        comment = "原神/武器/法器"
-
-        writer.writerow([word, hiragana, hinshi, comment])
-
-with open(os.path.join(data_dir, "weapon/other.csv"), "a", encoding="utf-8") as f:
-    print("新規追加 (武器/その他): ", len(weapon_other))
-    writer = csv.writer(f)
-    for data in weapon_other:
-        word = data["ja"]
-        hiragana = (
-            jaconv.kata2hira(data["pronunciationJa"])
-            if "pronunciationJa" in data
-            else ""
-        )
-        hinshi = "名詞"
-        comment = data["notes"] if "notes" in data else ""
-
-        writer.writerow([word, hiragana, hinshi, comment])
+write(weapon["sword"],"weapon/sword.csv","名詞","原神/武器/片手剣")
+write(weapon["claymore"],"weapon/claymore.csv","名詞","原神/武器/両手剣")
+write(weapon["polearm"],"weapon/polearm.csv","名詞","原神/武器/長柄武器")
+write(weapon["bow"],"weapon/bow.csv","名詞","原神/武器/弓")
+write(weapon["catalyst"],"weapon/catalyst.csv","名詞","原神/武器/法器")
+write(weapon_other,"weapon/other.csv","名詞")
