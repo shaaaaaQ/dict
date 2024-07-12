@@ -126,5 +126,5 @@ def write(data_list, filepath, hinshi, comment=""):
                 writer.writerow([word, hiragana, hinshi, _comment])
 
 
-for v in extracted:
+for v in extracted.values():
     write(v["data"], *v["args"])
