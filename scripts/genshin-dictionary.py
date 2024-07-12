@@ -45,6 +45,7 @@ element = []
 artifact_set = []
 artifact_piece = []
 character_main = []
+enemy = []
 boss = []
 
 for data in dataset:
@@ -69,6 +70,8 @@ for data in dataset:
             artifact_piece.append(data)
         elif "character-main" in tags:
             character_main.append(data)
+        elif "enemy" in tags:
+            enemy.append(data)
         elif "enemy-boss" in tags:
             boss.append(data)
 
@@ -82,4 +85,5 @@ write(element, "element.csv", "名詞")
 write(artifact_set, "artifact/set.csv", "名詞", "原神/聖遺物")
 write(artifact_piece, "artifact/piece.csv", "名詞")
 write(character_main, "character/playable.csv", "人名", "原神/キャラクター")
+write(enemy, "enemy.csv", "名詞", "原神/敵")
 write(boss, "boss.csv", "名詞", "原神/ボス")
