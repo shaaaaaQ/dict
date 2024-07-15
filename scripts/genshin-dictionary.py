@@ -3,6 +3,7 @@ import os
 import csv
 import glob
 import jaconv
+import re
 
 dirname = os.path.dirname(__file__)
 data_dir = os.path.join(dirname, "../data/Genshin Impact")
@@ -60,14 +61,20 @@ q = {
         "khaenriah": ["area/khaenriah.csv", "地名その他", "原神/地名/カーンルイア"],
         "location": ["area/other.csv", "地名その他"],
     },
+    "domain": ["domain.csv", "名詞", "原神/秘境"],
+    "item.csv": ["item/item.csv", "名詞", "原神/アイテム"],
     "drop": ["item/drop.csv", "名詞", "原神/アイテム/ドロップ"],
     "drop-boss": ["item/drop-boss.csv", "名詞", "原神/アイテム/ボスドロップ"],
+    "gemstone": ["item/gemstone.csv", "名詞", "原神/アイテム/宝石"],
     "talent-material": ["item/talent-material.csv", "名詞", "原神/アイテム/天賦素材"],
     "weapon-material": ["item/weapon-material.csv", "名詞", "原神/アイテム/武器素材"],
+    "food": ["food.csv", "名詞", "原神/食べ物"],
+    "character-main": ["character/playable.csv", "人名", "原神/キャラクター"],
+    "character-sub": ["character/npc.csv", "人名", "原神/キャラクター"],
+    "sereniteapot": ["sereniteapot.csv", "名詞", "原神/塵歌壺"],
     "element": ["element.csv", "名詞"],
     "artifact-set": ["artifact/set.csv", "名詞", "原神/聖遺物"],
     "artifact-piece": ["artifact/piece.csv", "名詞"],
-    "character-main": ["character/playable.csv", "人名", "原神/キャラクター"],
     "living-being": ["living-being.csv", "名詞", "原神/生物"],
     "enemy": ["enemy/enemy.csv", "名詞", "原神/敵"],
     "boss": ["enemy/boss.csv", "名詞", "原神/ボス"],
@@ -105,6 +112,9 @@ for data in dataset:
                 extracted[k] = {"data": [data], "args": res[1]}
 
 
+p = re.compile("[\u30A0-\u30FF]+")
+
+
 def write(data_list, filepath, hinshi, comment=""):
     if data_list:
         with open(os.path.join(data_dir, filepath), "a", encoding="utf-8") as f:
@@ -117,6 +127,9 @@ def write(data_list, filepath, hinshi, comment=""):
                     if "pronunciationJa" in data
                     else ""
                 )
+                if not hiragana:
+                    if p.fullmatch(word):
+                        hiragana = jaconv.kata2hira(word)
                 _comment = ""
                 if comment:
                     _comment = comment
