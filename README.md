@@ -9,8 +9,10 @@
 ### scripts
 
 ```bash
-# 依存関係
-pip install requests jaconv
+# Windows
+# winget install fzf
+
+pip install requests jaconv pyfzf
 ```
 
 きたない
