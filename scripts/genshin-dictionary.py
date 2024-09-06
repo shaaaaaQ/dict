@@ -7,10 +7,12 @@ import re
 
 dirname = os.path.dirname(__file__)
 data_dir = os.path.join(dirname, "../data/Genshin Impact")
+ex_data_dir = os.path.join(dirname, "../data/Genshin Impact Extra")
 dataset = requests.get("https://dataset.genshin-dictionary.com/words.json").json()
 
 excludes = []
 files = glob.glob(os.path.join(data_dir, "**/*.csv"), recursive=True)
+files.extend(glob.glob(os.path.join(ex_data_dir, "**/*.csv"), recursive=True))
 for csv_path in files:
     with open(csv_path, encoding="utf-8") as f:
         for row in csv.reader(f):
