@@ -29,4 +29,4 @@ pip install requests jaconv pyfzf
 ### 鳴潮
 
 読み方わからん  
-chatgpt に任せてるからおかしいところあがあるかも
+chatgpt に任せてるからおかしいところがあるかも
