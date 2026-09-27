@@ -7,9 +7,7 @@
 品詞適当かも
 
 TODO
-- 原神のつかわないやつを別にわける
-    - ato area
-- コード綺麗にする
+- 原神の通常とExtraの分ける基準をきめる
 
 ### scripts
 
@@ -19,8 +17,6 @@ TODO
 
 pip install requests jaconv pyfzf
 ```
-
-きたない
 
 ### 原神
 
