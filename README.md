@@ -28,3 +28,8 @@ pip install requests jaconv pyfzf
 
 読み方わからん  
 chatgpt に任せてるからおかしいところがあるかも
+
+### ライセンス
+[scripts](/scripts/)内のプログラムは[MIT License](/LICENSE)です
+
+辞書に含まれるゲーム内名称などは、それぞれの権利者に帰属します。
